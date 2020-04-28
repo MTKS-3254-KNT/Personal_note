@@ -1,24 +1,77 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
+| Type   | Column             | Options                               |
+| ------ | ------------------ | ------------------------------------- |
+| string | name               | null: false                           |
+| string | email              | null: false, unique:true, default: "" |
+| string | encrypted_password | null: false,              default: "" |
+|        |                    |                                       |
 
-Things you may want to cover:
+### Association
+- has_many: notes
+- has_many: comments
 
-* Ruby version
+---
 
-* System dependencies
+## notesテーブル
+| Type   | Column       | Options     |
+| ------ | ------------ | ----------- |
+| string | Name         | null: false |
+| string | title        | null: false |
+| string | text1        | null: false |
+| string | text2        |             |
+| string | text3        |             |
+| string | text4        |             |
+| string | text5        |             |
+| string | text6        |             |
+| text   | introduction | null: false |
+|        |              |             |
 
-* Configuration
+### Association
+- belongs_to: user
+- has_many :note_tags
+- has_many :tags, through: :note_tags
+- has_many: comments
 
-* Database creation
+---
 
-* Database initialization
+## tagsテーブル
+| Type       | Column          | Options     |
+| ---------- | --------------- | ----------- |
+| references | name            | null: false |
+|            |                 |             |
 
-* How to run the test suite
+### Association
+- has_many :note_tags
+- has_many :notes, through: :note_tags
 
-* Services (job queues, cache servers, search engines, etc.)
+---
 
-* Deployment instructions
+## note_tagsテーブル
+| Type       | Column          | Options     |
+| ---------- | --------------- | ----------- |
+| references | note            | null: false |
+| references | tag             | null: false |
+|            |                 |             |
 
-* ...
+### Association
+- belongs_to :note
+- belongs_to :tag
+
+---
+
+## commentsテーブル
+| Type       | Column  | Options     |
+| ---------- | ------- | ----------- |
+| references | user    | null: false |
+| references | note    | null: false |
+| text       | comment | null: false |
+|            |         |             |
+
+### Association
+
+- belongs_to: user
+- belongs_to: item
+
+---
