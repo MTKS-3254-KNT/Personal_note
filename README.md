@@ -9,8 +9,8 @@
 |        |                    |                                       |
 
 ### Association
-- has_many: notes
-- has_many: comments
+- has_many :notes
+- has_many :comments
 
 ---
 
@@ -26,13 +26,14 @@
 | string | text5        |             |
 | string | text6        |             |
 | text   | introduction | null: false |
+| string | secret       | null: false |
 |        |              |             |
 
 ### Association
-- belongs_to: user
+- belongs_to :user
 - has_many :note_tags
 - has_many :tags, through: :note_tags
-- has_many: comments
+- has_many :comments
 
 ---
 
@@ -61,6 +62,18 @@
 
 ---
 
+## memosテーブル
+| Type       | Column | Options     |
+| ---------- | ------ | ----------- |
+| references | user   | null: false |
+| text       | memo   | null: false |
+|            |        |             |
+
+### Association
+- belongs_to :user
+
+---
+
 ## commentsテーブル
 | Type       | Column  | Options     |
 | ---------- | ------- | ----------- |
@@ -71,7 +84,7 @@
 
 ### Association
 
-- belongs_to: user
-- belongs_to: item
+- belongs_to :user
+- belongs_to :item
 
 ---
